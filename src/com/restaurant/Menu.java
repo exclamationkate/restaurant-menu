@@ -1,9 +1,7 @@
 package com.restaurant;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 
 public class Menu {
