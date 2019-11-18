@@ -1,86 +1,78 @@
 package com.restaurant;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Menu {
 
-    private ArrayList<MenuItem> appetizers;
-    private ArrayList<MenuItem> mainCourses;
-    private ArrayList<MenuItem> desserts;
-    private Date lastUpdated;
+    private ArrayList<MenuItem> menuItems;
+    private LocalDateTime lastUpdated = LocalDateTime.now();
+    private LinkedHashMap<String, String> categories = new LinkedHashMap<>();
 
-
-    public Menu(ArrayList<MenuItem> appetizers, ArrayList<MenuItem> mainCourses, ArrayList<MenuItem> desserts, Date lastUpdated) {
-        this.appetizers = appetizers;
-        this.mainCourses = mainCourses;
-        this.desserts = desserts;
-        this.lastUpdated = lastUpdated;
-    }
-
+    // Constructor
     public Menu() {
-        this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new Date());
+        categories.put("Appetizers", "Appetizer");
+        categories.put("Main Courses", "Main Course");
+        categories.put("Desserts", "Dessert");
     }
 
-    public ArrayList<MenuItem> getAppetizers() {
-        return appetizers;
+    // Getters and Setters
+    public ArrayList<MenuItem> getMenuItems() { return menuItems; }
+
+    public void addMenuItems(ArrayList<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
-    public void addAppetizer(MenuItem menuItem) {
-        appetizers.add(menuItem);
+    public LocalDateTime getLastUpdated() { return lastUpdated; }
+
+    public void setLastUpdated() { lastUpdated = LocalDateTime.now(); }
+
+    public HashMap<String, String> getCategories() { return categories; }
+
+    public void addCategory(String menuTitle, String category) {
+        categories.put(menuTitle, category);
     }
 
-    public ArrayList<MenuItem> getMainCourses() {
-        return mainCourses;
+    // Instance Methods
+    public void addMenuItem(MenuItem menuItem) {
+        boolean isOnMenu = false;
+        for (MenuItem item : menuItems) {
+            if (item.equals(menuItem)) {
+                System.out.println("Item is already on the menu.\n");
+                isOnMenu = true;
+            }
+        }
+        if (!isOnMenu) {
+            menuItems.add(menuItem);
+            lastUpdated = LocalDateTime.now();
+        }
     }
 
-    public void addMainCourse(MenuItem menuItem) {
-        mainCourses.add(menuItem);
+    public void removeMenuItem(MenuItem menuItem) {
+        menuItems.remove(menuItem);
+        lastUpdated = LocalDateTime.now();
     }
 
-    public ArrayList<MenuItem> getDesserts() {
-        return desserts;
-    }
-
-    public void addDessert(MenuItem menuItem) {
-        desserts.add(menuItem);
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated() {
-        lastUpdated.getTime();
-    }
-
-    // TO DO: Refactor this method to make it DRY
     public void displayMenu() {
-        System.out.println("Appetizers:");
-        for (MenuItem item : appetizers) {
-            System.out.print(item.getName() + " $" + item.getPrice());
-            if (item.getIsNew()) {
-                System.out.print(" New Item!!");
+        for (Map.Entry<String, String> entry : categories.entrySet()) {
+            System.out.println("** " + entry.getKey() + " **");
+            for (MenuItem item : menuItems) {
+                if (item.getCategory() == entry.getValue()) {
+                    item.displayMenuItem();
+                }
             }
-            System.out.println("\n\t" + item.getDescription());
+            System.out.println("");
         }
-        System.out.println("\nMain Courses:");
-        for (MenuItem item : mainCourses) {
-            System.out.print(item.getName() + " $" + item.getPrice());
-            if (item.getIsNew()) {
-                System.out.print(" New Item!!");
-            }
-            System.out.println("\n\t" + item.getDescription());
-        }
-        System.out.println("\nDesserts:");
-        for (MenuItem item : desserts) {
-            System.out.print(item.getName() + " $" + item.getPrice());
-            if (item.getIsNew()) {
-                System.out.print(" New Item!!");
-            }
-            System.out.println("\n\t" + item.getDescription());
-        }
-        System.out.println("\nMenu last updated on: " + lastUpdated);
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "menuItems=" + menuItems +
+                ", lastUpdated=" + lastUpdated +
+                '}';
     }
 }

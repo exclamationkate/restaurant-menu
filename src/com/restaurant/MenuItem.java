@@ -1,21 +1,26 @@
 package com.restaurant;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 public class MenuItem {
 
     private String name;
     private float price;
     private String description;
+    private String category;
     private boolean isNew;
 
-    public MenuItem(String name, float price, String description, boolean isNew) {
+    public MenuItem(String name, float price, String description, String category, boolean isNew) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.category = category;
         this.isNew = isNew;
     }
 
-    public MenuItem(String name, float price, String description) {
-        this(name, price, description, false);
+    public MenuItem(String name, float price, String description, String category) {
+        this(name, price, description, category, false);
     }
 
     public String getName() {
@@ -42,12 +47,48 @@ public class MenuItem {
         this.description = aDescription;
     }
 
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) { this.category = category; }
+
     public boolean getIsNew() {
         return isNew;
     }
 
     public void setIsNew(boolean aIsNew) {
         this.isNew = aIsNew;
+    }
+
+    public void displayMenuItem() {
+        System.out.print(name + " " + price);
+        if (isNew) {
+            System.out.print(" (New Item!)");
+        }
+        System.out.println(" - " + description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Objects.equals(name, menuItem.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", isNew=" + isNew +
+                "}\n";
     }
 }
 
