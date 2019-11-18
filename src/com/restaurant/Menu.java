@@ -19,23 +19,6 @@ public class Menu {
         categories.put("Desserts", "Dessert");
     }
 
-    // Getters and Setters
-    public ArrayList<MenuItem> getMenuItems() { return menuItems; }
-
-    public void addMenuItems(ArrayList<MenuItem> menuItems) {
-        this.menuItems = menuItems;
-    }
-
-    public LocalDateTime getLastUpdated() { return lastUpdated; }
-
-    public void setLastUpdated() { lastUpdated = LocalDateTime.now(); }
-
-    public HashMap<String, String> getCategories() { return categories; }
-
-    public void addCategory(String menuTitle, String category) {
-        categories.put(menuTitle, category);
-    }
-
     // Instance Methods
     public void addMenuItem(MenuItem menuItem) {
         boolean isOnMenu = false;
@@ -75,4 +58,22 @@ public class Menu {
                 ", lastUpdated=" + lastUpdated +
                 '}';
     }
+
+    // Getters and Setters
+    public ArrayList<MenuItem> getMenuItems() { return menuItems; }
+
+    public void addMenuItems(ArrayList<MenuItem> menuItems) {
+        this.menuItems = menuItems;
+    }
+
+    public LocalDateTime getLastUpdated() { return lastUpdated; }
+
+    public void setLastUpdated() { lastUpdated = LocalDateTime.now(); }
+
+    public HashMap<String, String> getCategories() { return categories; }
+
+    public void addCategory(String menuTitle, String category) {
+        categories.put(menuTitle, category);
+    }
+
 }

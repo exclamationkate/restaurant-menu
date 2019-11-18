@@ -1,6 +1,5 @@
 package com.restaurant;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 public class MenuItem {
@@ -11,6 +10,7 @@ public class MenuItem {
     private String category;
     private boolean isNew;
 
+    // Constructors
     public MenuItem(String name, float price, String description, String category, boolean isNew) {
         this.name = name;
         this.price = price;
@@ -23,6 +23,40 @@ public class MenuItem {
         this(name, price, description, category, false);
     }
 
+    // Instance methods
+    public void displayMenuItem() {
+        System.out.print(name + " " + price);
+        if (isNew) {
+            System.out.print(" (New Item!)");
+        }
+        System.out.println(" - " + description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Objects.equals(name, menuItem.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", isNew=" + isNew +
+                "}\n";
+    }
+
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -59,36 +93,5 @@ public class MenuItem {
         this.isNew = aIsNew;
     }
 
-    public void displayMenuItem() {
-        System.out.print(name + " " + price);
-        if (isNew) {
-            System.out.print(" (New Item!)");
-        }
-        System.out.println(" - " + description);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MenuItem menuItem = (MenuItem) o;
-        return Objects.equals(name, menuItem.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", isNew=" + isNew +
-                "}\n";
-    }
 }
 
