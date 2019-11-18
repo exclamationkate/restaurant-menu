@@ -21,39 +21,35 @@ public class Restaurant {
         menu.addMenuItems(menuItems);
 
         // Print the entire menu to the screen
-        System.out.println("Print the entire menu:\n" + menu + "\n");
+        System.out.println(menu + "\n");
 
         // Print an individual menu item to the screen.
-        System.out.println("Print an individual menu item:\n" + menuItem4);
+        System.out.println(menuItem4);
 
         // Create and add an individual menu item to the menu, then reprint the menu
         MenuItem menuItem5 = new MenuItem("Brownie a la Mode", 5.99F, "Chocolate chip brownie with a scoop of vanilla ice cream and hot fudge on top.", "Dessert", true);
         menu.addMenuItem(menuItem5);
 
-        System.out.println("Create and add an individual menu item to the menu, then reprint the menu:\n" + menu + "\n");
+        System.out.println(menu + "\n");
 
         // Delete an item from a menu, then reprint the menu.
         menu.removeMenuItem(menuItem3);
 
-        System.out.println("Delete an item from a menu, then reprint the menu:\n" + menu + "\n");
+        System.out.println(menu + "\n");
 
         // Test method to tell if menu item is new
-        System.out.println("Test method to tell if menu item is new:");
         System.out.println("Is menuItem1 new? " + menuItem1.getIsNew());
         System.out.println("Is menuItem2 new? " + menuItem2.getIsNew() + "\n");
 
         // Test method to tell when menu was last updated
-        System.out.println("Test method to tell when menu was last updated:");
         System.out.println("Menu was last updated on: " + menu.getLastUpdated() + "\n");
 
         //Create duplicate menu item and try to add it to the menu
         MenuItem menuItem6 = new MenuItem("Buffalo Wings", 11.99F, "Chicken Wings tossed in hot buffalo sauce", "Appetizer", false);
 
-        System.out.println("Create duplicate menu item and try to add it to the menu:");
         menu.addMenuItem(menuItem6); // Prints 'Item is already on the menu.'
 
         // Prettier presentation of the menu
-        System.out.println("Prettier presentation of the menu:");
         menu.displayMenu();
 
     }
